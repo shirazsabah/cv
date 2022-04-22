@@ -1,0 +1,206 @@
+---
+title: "Shiraz A Sabah's CV"
+author: Shiraz A Sabah
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: false
+output:
+  pagedown::html_resume:
+    css: ['dd_cv.css', 'resume']
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+My_GS <- scholar::get_profile("uPg-O4YAAAAJ") 
+
+library(magrittr) # For the pipe
+source("cv_printing_functions.r")
+
+# Read in all data and initialize a CV printer object
+CV <- create_CV_object(
+  data_location = "https://docs.google.com/spreadsheets/d/1WKzFXByG0MFgV6GuYAoEvNdv6NJqxAoc0eGi7Alu7H8/edit?usp=sharing",  
+  pdf_mode = params$pdf_mode
+)
+
+```
+
+
+```{r}
+# When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
+if(params$pdf_mode) {
+    cat("
+<style>
+:root{
+  --decorator-outer-offset-left: -6.5px;
+}
+</style>")
+}
+```
+
+
+Aside
+================================================================================
+
+```{r}
+# Build interactive network of positions colored by section
+# and connected if they occurred in the same year
+# datadrivencv::build_network_logo(CV$entries_data)
+```
+
+
+```{r}
+if(params$pdf_mode){
+  cat("View this CV online with links at https://github.com/shirazsabah/cv/cv.html")
+} else {
+  cat("[<i class='fa fa-download'></i> Download a PDF of this CV](https://github.com/shirazsabah/cv/cv.pdf)")
+}
+```
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+- <i class="fa fa-envelope"></i> shiraz.sabah@ndorms.ox.ac.uk
+- <i class="fa fa-github"></i> [github.com/shirazsabah](https://github.com/shirazsabah)
+- <i class="fa fa-linkedin"></i> [shirazsabah](https://www.linkedin.com/in/shiraz‑sabah‑157863177)
+- <i class="fa fa-home"></i> [ndorms.ox.ac.uk/team/shiraz‑sabah](https://www.ndorms.ox.ac.uk/team/shiraz‑sabah)
+- <i class="fa fa-twitter"></i> [bonedoc247](https://twitter.com/bonedoc247)
+- <i class="fa fa-phone"></i> +44 (0) 7956 534625
+
+- For more information, please contact me via email.
+
+
+Memberships {#member}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_member_info()
+```
+
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Last updated on `r Sys.Date()`.
+
+
+
+Main
+================================================================================
+
+Shiraz A Sabah {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+# Note the special double pipe so we modify the CV object in place
+CV %<>% print_text_block("intro") 
+```
+
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('education')
+```
+
+
+
+Qualifications {data-icon=award data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('qualifications')
+```
+
+
+
+Prizes {data-icon=trophy data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('prizes')
+```
+
+
+
+Grants {data-icon=laptop data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('grants')
+```
+
+
+
+Leadership & Management {data-icon=suitcase data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('management')
+```
+
+
+
+Employment {data-icon=stethoscope data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('employment')
+```
+
+
+
+Teaching {data-icon=chalkboard-teacher data-concise=true}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+CV %<>% print_text_block('teaching_aside')
+```
+:::
+
+```{r}
+CV %<>% print_section('teaching')
+```
+
+
+
+Research {data-icon=chart-line data-concise=true}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+CV %<>% print_text_block('research_aside')
+```
+
+Find more information on my Google Scholar profile: `r round(scholar::get_num_articles(My_GS$id), -1)` scientific publications, `r My_GS$total_cites` citations, h-index: `r My_GS$h_index`.
+
+- <i class="fa fa-link"></i> [scholar/shirazsabah](https://scholar.google.co.uk/citations?user=uPg-O4YAAAAJ&hl=en&oi=ao)
+:::
+
+```{r}
+CV %<>% print_section('research')
+```
+
+
+
+References {data-icon=book data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('references')
+```
+
+
+```{r}
+CV %<>% print_links()
+```
+
