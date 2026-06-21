@@ -60,9 +60,7 @@ if(params$pdf_mode){
 
 ## Contact {#contact}
 
--   <i class="fa fa-envelope"></i> [shiraz.sabah\@ndorms.ox.ac.uk](mailto:shiraz.sabah@ndorms.ox.ac.uk){.email}
-
--   <i class="fa fa-home"></i> [ndorms.ox.ac.uk/team/shiraz‑sabah](https://www.ndorms.ox.ac.uk/team/shiraz-sabah)
+-   <i class="fa fa-envelope"></i> [shiraz.sabah\@nhs.net](mailto:shiraz.sabah@nhs.net){.email}
 
 -   <i class="fa fa-github"></i> [github.com/shirazsabah](https://github.com/shirazsabah)
 
@@ -89,16 +87,16 @@ CV %>% print_member_info()
 CV %<>% print_text_block("intro") 
 ```
 
-## Education {data-icon="graduation-cap" data-concise="true"}
-
-```{r}
-CV %<>% print_section('education')
-```
-
 ## Qualifications {data-icon="award" data-concise="true"}
 
 ```{r}
 CV %<>% print_section('qualifications')
+```
+
+## Employment {data-icon="stethoscope" data-concise="true"}
+
+```{r}
+CV %<>% print_section('employment')
 ```
 
 ## Prizes {data-icon="trophy" data-concise="true"}
@@ -119,11 +117,12 @@ CV %<>% print_section('grants')
 CV %<>% print_section('management')
 ```
 
-## Employment {data-icon="stethoscope" data-concise="true"}
+## Education {data-icon="graduation-cap" data-concise="true"}
 
 ```{r}
-CV %<>% print_section('employment')
+CV %<>% print_section('education')
 ```
+
 
 ## Teaching {data-icon="chalkboard-teacher" data-concise="true"}
 
